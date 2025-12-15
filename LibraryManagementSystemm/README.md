@@ -1,24 +1,107 @@
-LibraryManagementSystem
+# 📚 Library Management System
 
-Yazılım Mimarisi ve Tasarımı dersi kapsamında geliştirilen bu Kütüphane Yönetim Sistemi, Java programlama dili kullanılarak nesne yönelimli prensiplere, katmanlı mimariye ve tasarım desenlerine uygun biçimde tasarlanmıştır. Proje, masaüstü ortamda çalışan Java Swing tabanlı grafiksel kullanıcı arayüzü (GUI) ile kullanıcı etkileşimini sağlamakta; arka planda ise iş mantığı (logic), veri modelleri (models) ve kullanıcı arayüzü (ui) katmanları birbirinden ayrılarak sürdürülebilir ve genişletilebilir bir yapı sunmaktadır.
+# Java Tabanlı, Tasarım Desenleri ile Güçlendirilmiş Kütüphane Otomasyonu
 
-Sistemin mimarisinde, kod tekrarını önlemek ve bakım maliyetini düşürmek amacıyla çeşitli tasarım desenleri etkin bir şekilde kullanılmıştır. Veritabanı bağlantı ve erişim işlemleri Singleton deseni ile tek bir merkezden yönetilerek kaynak kullanımının kontrol altında tutulması sağlanmıştır. Kullanıcı nesnelerinin (Üye / Personel) oluşturulmasında Factory deseni uygulanarak rol bazlı nesne üretimi soyutlanmıştır. Kitapların ödünç alma ve iade süreçlerinde farklı durumları (Available, Loaned vb.) yönetmek için State deseni kullanılmış; böylece kitap durumuna bağlı davranışlar merkezi ve esnek bir yapı ile kontrol altına alınmıştır. Ayrıca sistem genelinde kitap, kullanıcı ve ödünç işlemlerinde meydana gelen değişikliklerin arayüzlere otomatik olarak yansıtılması amacıyla Observer deseni uygulanmış, bu sayede veri güncellemeleri anlık ve tutarlı biçimde sağlanmıştır.
+---
 
-Proje, Üye (Member) ve Personel (Admin) olmak üzere iki temel kullanıcı rolü üzerine inşa edilmiştir. Personel kullanıcılar; kitap ve üye ekleme, silme ve güncelleme (CRUD) işlemlerini gerçekleştirebilmekte, sistemdeki tüm ödünç alma işlemlerini ve gecikme cezalarını takip edebilmektedir. Üyeler ise kütüphane kataloğu üzerinden detaylı kitap araması yapabilmekte, kitapların stok ve müsaitlik durumlarını görüntüleyebilmekte, kendi ödünç aldıkları kitapları, iade tarihlerini ve varsa gecikme cezalarını sistem üzerinden takip edebilmektedir. Ödünç süresi aşımı durumunda sistem otomatik olarak ceza hesaplaması yapmakta ve bu bilgi hem kullanıcı profiline hem de yönetici ekranına yansıtılmaktadır.
+# 🧩 Proje Hakkında
 
-Komutların kullanıcı arayüzünden bağımsız şekilde çalıştırılabilmesi için Command deseni kullanılmış; ödünç alma ve iade işlemleri komut nesneleri aracılığıyla gerçekleştirilmiştir. Bu yaklaşım, arayüz ile iş mantığı arasındaki bağımlılığı azaltarak sistemin test edilebilirliğini ve genişletilebilirliğini artırmıştır. Tüm bu yapı, Facade deseni ile birleştirilerek arayüz katmanının karmaşık iş mantığına doğrudan erişimi engellenmiş ve sistem tek bir merkezden kontrol edilir hâle getirilmiştir.
+**Library Management System**, Yazılım Mimarisi ve Tasarımı dersi kapsamında geliştirilmiş; **nesne yönelimli programlama ilkelerini**, **katmanlı mimariyi** ve **modern yazılım tasarım desenlerini** merkeze alan kapsamlı bir kütüphane otomasyon sistemidir. Proje, **Java** programlama dili kullanılarak geliştirilmiş olup masaüstü ortamda çalışan **Java Swing tabanlı grafiksel kullanıcı arayüzü (GUI)** ile kullanıcı etkileşimini sağlamaktadır.
 
-Sonuç olarak bu proje; nesne yönelimli programlama ilkelerine uygun, tasarım desenleriyle güçlendirilmiş, modüler, okunabilir ve geliştirilmeye açık bir kütüphane otomasyon sistemi sunmaktadır. Gerçek hayattaki kütüphane süreçlerini temel alan bu yapı, akademik gereksinimlerin yanı sıra pratik yazılım mimarisi yaklaşımlarını da başarıyla yansıtmaktadır.
+Sistem; **kullanıcı deneyimi**, **kod sürdürülebilirliği** ve **genişletilebilirlik** hedeflenerek tasarlanmış, gerçek bir kütüphane ortamında karşılaşılabilecek tüm temel süreçleri kapsayacak şekilde modellenmiştir.
 
-Proje Ekibi
+---
 
-Bu proje aşağıdaki ekip üyeleri tarafından geliştirilmiştir:
+# 🏗️ Mimari Yapı
 
-Arda TEKİN – 1230505052
-GitHub: https://github.com/ardatekin0
+Proje; **ui**, **logic** ve **models** olmak üzere üç ana katmandan oluşmaktadır:
 
-Fatma Sude GÖK – 1230505048
-GitHub: https://github.com/fatmasudegok
+* **UI (User Interface)**
+  Kullanıcı etkileşimini sağlayan Swing tabanlı ekranları içerir. Arayüz katmanı, iş mantığından tamamen izole edilmiştir.
 
-Ömer KARGALI – 1220505069
-GitHub: https://github.com/OmerKargali
+* **Logic (İş Mantığı)**
+  Ödünç alma, iade, ceza hesaplama, kullanıcı ve kitap yönetimi gibi tüm operasyonel süreçler bu katmanda yürütülür.
+
+* **Models (Veri Modelleri)**
+  Kitap, kullanıcı, rol ve durum gibi sistem varlıklarını temsil eden sınıfları içerir.
+
+Bu yapı sayesinde sistem **bakımı kolay**, **test edilebilir** ve **ölçeklenebilir** bir mimari sunmaktadır.
+
+---
+
+# 🎯 Kullanılan Tasarım Desenleri
+
+Projede, yazılım kalitesini artırmak ve karmaşıklığı yönetmek amacıyla aşağıdaki tasarım desenleri etkin biçimde uygulanmıştır:
+
+🔹 **Singleton Pattern**
+Veritabanı bağlantısının tek bir örnek üzerinden yönetilmesini sağlar. Kaynak kullanımını optimize eder.
+
+🔹 **Factory Pattern**
+Kullanıcı nesnelerinin (Üye / Personel) rol bazlı olarak oluşturulmasını sağlar.
+
+🔹 **Facade Pattern**
+Karmaşık iş mantığını tek bir merkezden sunarak arayüz katmanının sistemle sade bir şekilde iletişim kurmasını sağlar.
+
+🔹 **State Pattern**
+Kitapların *müsait*, *ödünçte* gibi durumlara göre farklı davranışlar sergilemesini sağlar.
+
+🔹 **Observer Pattern**
+Kitap, kullanıcı ve ödünç işlemlerindeki değişikliklerin arayüzlere anlık olarak yansıtılmasını sağlar.
+
+🔹 **Command Pattern**
+Ödünç alma ve iade işlemlerinin komut nesneleri aracılığıyla yürütülmesini sağlar ve arayüz–iş mantığı bağımlılığını azaltır.
+
+---
+
+# 👥 Kullanıcı Rolleri ve Yetkiler
+
+# 👨‍💼 Personel (Admin)
+
+* Kitap ekleme, silme, güncelleme (CRUD)
+* Üye yönetimi
+* Ödünç kitap takibi
+* Gecikme ve ceza kontrolü
+* Sistem genelinde raporlama
+
+# 👤 Üye (Member)
+
+* Detaylı kitap arama
+* Kitap stok ve durum kontrolü
+* Kitap ödünç alma ve iade
+* Kendi ödünç geçmişini görüntüleme
+* Gecikme cezası takibi
+
+---
+
+# ⏱️ Ceza ve Ödünç Yönetimi
+
+Sistem, kitapların iade tarihlerini otomatik olarak takip eder. Süresi geçen kitaplar için gecikme cezası hesaplanır ve:
+
+* Üye profiline
+* Personel kontrol ekranına
+
+eş zamanlı olarak yansıtılır.
+Personel kullanıcılar cezalardan **muaf**, üyeler için ise ceza mekanizması aktif şekilde çalışır.
+
+---
+
+# 🚀 Projenin Kazanımları
+
+Bu proje ile;
+
+✔ Tasarım desenlerinin gerçek bir sistemde nasıl uygulanacağı
+✔ Katmanlı mimarinin avantajları
+✔ Java Swing ile büyük ölçekli GUI geliştirme
+✔ OOP prensiplerine uygun sürdürülebilir yazılım geliştirme
+
+konularında güçlü bir deneyim kazanılmıştır.
+
+---
+
+# 👨‍💻 Proje Ekibi
+
+| İsim               | Öğrenci No | GitHub                                                                |
+| ------------------ | ---------- | --------------------------------------------------------------------- |
+| **Arda TEKİN**     | 1230505052 | 🔗 [https://github.com/ardatekin0](https://github.com/ardatekin0)     |
+| **Fatma Sude GÖK** | 1230505048 | 🔗 [https://github.com/fatmasudegok](https://github.com/fatmasudegok) |
+| **Ömer KARGALI**   | 1220505069 | 🔗 [https://github.com/OmerKargali](https://github.com/OmerKargali)   |
